@@ -15,6 +15,8 @@ function App() {
     togglePause,
     speed,
     setSpeed,
+    arraySize,
+    setArraySize,
   } = useSorting();
 
   return (
@@ -38,6 +40,8 @@ function App() {
         runSort={runSort}
         speed={speed}
         setSpeed={setSpeed}
+        arraySize={arraySize}
+        setArraySize={setArraySize}
       />
 
       <footer className="text-gray-500 text-sm mt-8">

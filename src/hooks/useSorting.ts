@@ -3,31 +3,31 @@ import { bubbleSort, mergeSort, quickSort, type SortStep } from '../algorithms/s
 
 export type AlgorithmType = 'bubble' | 'merge' | 'quick';
 
-
 export const useSorting = () => {
     const [array, setArray] = useState<number[]>([]);
     const [algorithm, setAlgorithm] = useState<AlgorithmType>('bubble');
     const [isSorting, setIsSorting] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
     const [speed, setSpeed] = useState(50);
+    const [arraySize, setArraySize] = useState(50);
     const [comparison, setComparison] = useState<number[]>([]); // Indices being compared
     const sortingRef = useRef<boolean>(false); // Ref to track sorting state immediately for loop
     const pausedRef = useRef<boolean>(false); // Ref for pause state
     const speedRef = useRef<number>(speed); // Ref for speed to access latest value in loop
 
     const resetArray = useCallback(() => {
-        // Allow reset if not sorting OR if paused
-        if (sortingRef.current && !pausedRef.current) return;
-        const newArray = Array.from({ length: 50 }, () =>
+        // Always allow reset. Force stop sorting.
+        sortingRef.current = false;
+        setIsSorting(false);
+        setIsPaused(false);
+        pausedRef.current = false;
+
+        const newArray = Array.from({ length: arraySize }, () =>
             Math.floor(Math.random() * 500) + 10
         );
         setArray(newArray);
         setComparison([]);
-        setIsSorting(false);
-        setIsPaused(false);
-        pausedRef.current = false;
-        sortingRef.current = false; // Ensure sorting ref is cleared
-    }, []);
+    }, [arraySize]);
 
     const togglePause = useCallback(() => {
         setIsPaused((prev) => {
@@ -100,5 +100,7 @@ export const useSorting = () => {
         togglePause,
         speed,
         setSpeed,
+        arraySize,
+        setArraySize,
     };
 };

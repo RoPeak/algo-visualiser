@@ -11,6 +11,8 @@ interface ControlsProps {
     runSort: () => void;
     speed: number;
     setSpeed: (speed: number) => void;
+    arraySize: number;
+    setArraySize: (size: number) => void;
 }
 
 export const Controls = ({
@@ -23,6 +25,8 @@ export const Controls = ({
     runSort,
     speed,
     setSpeed,
+    arraySize,
+    setArraySize,
 }: ControlsProps) => {
     return (
         <div className="flex flex-wrap items-center justify-center gap-6 p-6 bg-gray-800/80 rounded-xl border border-gray-700 backdrop-blur-sm w-full max-w-5xl">
@@ -44,8 +48,7 @@ export const Controls = ({
             <div className="flex items-center gap-2">
                 <button
                     onClick={resetArray}
-                    disabled={isSorting && !isPaused}
-                    className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors disabled:opacity-50"
+                    className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
                     title="Reset Array"
                 >
                     <RotateCcw size={20} />
@@ -76,15 +79,32 @@ export const Controls = ({
             <div className="h-8 w-px bg-gray-700" />
 
             <div className="flex items-center gap-4">
-                <span className="text-sm text-gray-400 font-medium">Speed</span>
-                <input
-                    type="range"
-                    min="1"
-                    max="100"
-                    value={speed}
-                    onChange={(e) => setSpeed(Number(e.target.value))}
-                    className="w-32 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                />
+                <div className="flex flex-col items-center gap-1">
+                    <span className="text-xs text-gray-400 font-medium">Speed</span>
+                    <input
+                        type="range"
+                        min="1"
+                        max="100"
+                        value={speed}
+                        onChange={(e) => setSpeed(Number(e.target.value))}
+                        className="w-24 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                    />
+                </div>
+
+                <div className="h-8 w-px bg-gray-700" />
+
+                <div className="flex flex-col items-center gap-1">
+                    <span className="text-xs text-gray-400 font-medium">Size: {arraySize}</span>
+                    <input
+                        type="range"
+                        min="10"
+                        max="100"
+                        value={arraySize}
+                        onChange={(e) => setArraySize(Number(e.target.value))}
+                        disabled={isSorting}
+                        className="w-24 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                    />
+                </div>
             </div>
         </div>
     );
