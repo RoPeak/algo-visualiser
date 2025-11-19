@@ -13,6 +13,7 @@ export const useSorting = () => {
     const [comparison, setComparison] = useState<number[]>([]); // Indices being compared
     const sortingRef = useRef<boolean>(false); // Ref to track sorting state immediately for loop
     const pausedRef = useRef<boolean>(false); // Ref for pause state
+    const speedRef = useRef<number>(speed); // Ref for speed to access latest value in loop
 
     const resetArray = useCallback(() => {
         // Allow reset if not sorting OR if paused
@@ -62,7 +63,8 @@ export const useSorting = () => {
             setComparison(step.comparison);
             // Speed calculation: Higher value = faster (lower delay)
             // Input 1-100. Delay 1000ms to 10ms.
-            const delay = Math.max(10, 1000 - (speed * 10));
+            const currentSpeed = speedRef.current;
+            const delay = Math.max(10, 1000 - (currentSpeed * 10));
             await new Promise((resolve) => setTimeout(resolve, delay));
         }
 
@@ -74,6 +76,10 @@ export const useSorting = () => {
     useEffect(() => {
         resetArray();
     }, [resetArray]);
+
+    useEffect(() => {
+        speedRef.current = speed;
+    }, [speed]);
 
     return {
         array,
