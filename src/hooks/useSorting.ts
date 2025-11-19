@@ -8,8 +8,11 @@ export const useSorting = () => {
     const [array, setArray] = useState<number[]>([]);
     const [algorithm, setAlgorithm] = useState<AlgorithmType>('bubble');
     const [isSorting, setIsSorting] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
+    const [speed, setSpeed] = useState(50);
     const [comparison, setComparison] = useState<number[]>([]); // Indices being compared
     const sortingRef = useRef<boolean>(false); // Ref to track sorting state immediately for loop
+    const pausedRef = useRef<boolean>(false); // Ref for pause state
 
     const resetArray = useCallback(() => {
         if (sortingRef.current) return; // Prevent reset while sorting
@@ -18,7 +21,17 @@ export const useSorting = () => {
         );
         setArray(newArray);
         setComparison([]);
+        setComparison([]);
         setIsSorting(false);
+        setIsPaused(false);
+        pausedRef.current = false;
+    }, []);
+
+    const togglePause = useCallback(() => {
+        setIsPaused((prev) => {
+            pausedRef.current = !prev;
+            return !prev;
+        });
     }, []);
 
     const runSort = useCallback(async () => {
@@ -38,16 +51,24 @@ export const useSorting = () => {
         }
 
         for (const step of generator) {
+            while (pausedRef.current) {
+                if (!sortingRef.current) break;
+                await new Promise((resolve) => setTimeout(resolve, 100));
+            }
             if (!sortingRef.current) break; // Allow stopping
+
             setArray(step.array);
             setComparison(step.comparison);
-            await new Promise((resolve) => setTimeout(resolve, 50)); // Hardcoded speed for now
+            // Speed calculation: Higher value = faster (lower delay)
+            // Input 1-100. Delay 1000ms to 10ms.
+            const delay = Math.max(10, 1000 - (speed * 10));
+            await new Promise((resolve) => setTimeout(resolve, delay));
         }
 
         setIsSorting(false);
         sortingRef.current = false;
         setComparison([]);
-    }, [array, algorithm, isSorting]);
+    }, [array, algorithm, isSorting, speed]);
 
     useEffect(() => {
         resetArray();
@@ -63,6 +84,11 @@ export const useSorting = () => {
         comparison,
         setComparison,
         resetArray,
+
         runSort,
+        isPaused,
+        togglePause,
+        speed,
+        setSpeed,
     };
 };
