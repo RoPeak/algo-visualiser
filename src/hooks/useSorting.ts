@@ -103,6 +103,10 @@ export const useSorting = () => {
         speedRef.current = speed;
     }, [speed]);
 
+    useEffect(() => {
+        resetArray();
+    }, [algorithm, resetArray]);
+
     return {
         array,
         setArray,

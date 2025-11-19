@@ -30,13 +30,19 @@ function App() {
         <p className="text-gray-400">Visualise sorting algorithms in real-time</p>
       </div>
 
-      <VisualiserBoard array={array} comparison={comparison} />
+      <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <VisualiserBoard array={array} comparison={comparison} />
+        </div>
 
-      <AlgorithmInfo
-        algorithm={algorithm}
-        description={description}
-        isSorting={isSorting}
-      />
+        <div className="lg:col-span-1">
+          <AlgorithmInfo
+            algorithm={algorithm}
+            description={description}
+            isSorting={isSorting}
+          />
+        </div>
+      </div>
 
       <Controls
         algorithm={algorithm}

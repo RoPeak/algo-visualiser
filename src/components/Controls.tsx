@@ -34,7 +34,6 @@ export const Controls = ({
                 <select
                     value={algorithm}
                     onChange={(e) => setAlgorithm(e.target.value as AlgorithmType)}
-                    disabled={isSorting}
                     className="px-4 py-2 bg-gray-900 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 outline-none"
                 >
                     <option value="bubble">Bubble Sort</option>
