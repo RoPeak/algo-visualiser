@@ -11,6 +11,7 @@ export const useSorting = () => {
     const [speed, setSpeed] = useState(50);
     const [arraySize, setArraySize] = useState(50);
     const [comparison, setComparison] = useState<number[]>([]); // Indices being compared
+    const [description, setDescription] = useState('Ready to sort'); // Current step description
     const sortingRef = useRef<boolean>(false); // Ref to track sorting state immediately for loop
     const pausedRef = useRef<boolean>(false); // Ref for pause state
     const speedRef = useRef<number>(speed); // Ref for speed to access latest value in loop
@@ -81,6 +82,7 @@ export const useSorting = () => {
 
             setArray(step.array);
             setComparison(step.comparison);
+            setDescription(step.description);
             // Speed calculation: Higher value = faster (lower delay)
             // Input 1-100. Delay 1000ms to 10ms.
             const currentSpeed = speedRef.current;
@@ -110,6 +112,7 @@ export const useSorting = () => {
         setIsSorting,
         comparison,
         setComparison,
+        description,
         resetArray,
 
         runSort,

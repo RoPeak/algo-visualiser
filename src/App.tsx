@@ -1,6 +1,7 @@
 import { useSorting } from './hooks/useSorting';
 import { VisualiserBoard } from './components/VisualiserBoard';
 import { Controls } from './components/Controls';
+import { AlgorithmInfo } from './components/AlgorithmInfo';
 
 function App() {
   const {
@@ -17,6 +18,7 @@ function App() {
     setSpeed,
     arraySize,
     setArraySize,
+    description,
   } = useSorting();
 
   return (
@@ -29,6 +31,12 @@ function App() {
       </div>
 
       <VisualiserBoard array={array} comparison={comparison} />
+
+      <AlgorithmInfo
+        algorithm={algorithm}
+        description={description}
+        isSorting={isSorting}
+      />
 
       <Controls
         algorithm={algorithm}
