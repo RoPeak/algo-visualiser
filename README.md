@@ -8,39 +8,45 @@ A modern, interactive sorting algorithm visualiser built with React, TypeScript,
 
 ## Features
 
--   **Real-time Visualisation**: Watch sorting algorithms sort data in real-time.
--   **Multiple Algorithms**:
-    -   Bubble Sort
-    -   Merge Sort
-    -   Quick Sort
--   **Interactive Controls**:
-    -   Play/Pause functionality
-    -   Adjustable sorting speed
-    -   Reset array at any time
--   **Responsive Design**: Works on various screen sizes.
--   **Modern UI**: Built with Tailwind CSS and Framer Motion for smooth animations.
+- **Multiple Algorithms**:
+  - Bubble Sort
+  - Merge Sort
+  - Quick Sort
+  - Insertion Sort
+  - Selection Sort
+  - Heap Sort
+  - Cocktail Shaker Sort
+- **Interactive Controls**:
+  - Play/Pause functionality
+  - Adjustable sorting speed
+  - Reset array at any time
+- **Responsive Design**: Works on various screen sizes.
+- **Modern UI**: Built with Tailwind CSS and Framer Motion for smooth animations.
 
 ## Tech Stack
 
--   **Frontend**: React, TypeScript
--   **Styling**: Tailwind CSS
--   **Animations**: Framer Motion
--   **Icons**: Lucide React
--   **Build Tool**: Vite
+- **Frontend**: React, TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Build Tool**: Vite
 
 ## Getting Started
 
 1.  **Clone the repository**
+
     ```bash
-    git clone https://github.com/yourusername/algo-visualiser.git
+    git clone https://github.com/RoPeak/algo-visualiser.git
     ```
 
 2.  **Install dependencies**
+
     ```bash
     npm install
     ```
 
 3.  **Run the development server**
+
     ```bash
     npm run dev
     ```
