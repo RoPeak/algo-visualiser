@@ -1,61 +1,61 @@
 # Algorithm Visualiser
 
-A modern, interactive sorting algorithm visualiser built with React, TypeScript, and Tailwind CSS.
+An interactive sorting algorithm visualiser built with React 19, TypeScript, and Tailwind CSS. Demonstrates clean separation of algorithm logic, animation state management, and component composition.
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![React](https://img.shields.io/badge/React-19.0-blue)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
+## What it does
 
-## Features
+Select a sorting algorithm, hit play, and watch a bar chart sort itself step by step. Adjust the animation speed, pause mid-sort, and reset to a new random array at any time. All algorithms share the same visual interface via a common step-trace format, so swapping in a new algorithm requires no UI changes.
 
-- **Multiple Algorithms**:
-  - Bubble Sort
-  - Merge Sort
-  - Quick Sort
-  - Insertion Sort
-  - Selection Sort
-  - Heap Sort
-  - Cocktail Shaker Sort
-- **Interactive Controls**:
-  - Play/Pause functionality
-  - Adjustable sorting speed
-  - Reset array at any time
-- **Responsive Design**: Works on various screen sizes.
-- **Modern UI**: Built with Tailwind CSS and Framer Motion for smooth animations.
+## Algorithms
+
+- Bubble Sort
+- Merge Sort
+- Quick Sort
+- Insertion Sort
+- Selection Sort
+- Heap Sort
+- Cocktail Shaker Sort
+
+## Architecture
+
+The codebase separates three concerns cleanly:
+
+| Layer | File | Responsibility |
+|-------|------|----------------|
+| Algorithm logic | `src/algorithms/sorting.ts` | Pure functions — no React, no side effects. Each algorithm produces a sequence of array snapshots (steps) that describe the sort. |
+| Animation state | `src/hooks/useSorting.ts` | Custom hook managing the current step index, play/pause state, and speed interval. Drives the visualiser from the step sequence. |
+| Display | `src/components/` | `VisualiserBoard`, `Controls`, `AlgorithmInfo` — receive state as props and render only. |
+
+This means algorithm logic is fully testable without a browser, and the UI never needs to know how a sort works.
 
 ## Tech Stack
 
-- **Frontend**: React, TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
-- **Build Tool**: Vite
+- **React 19** with TypeScript
+- **Tailwind CSS** for styling
+- **Framer Motion** for bar animations
+- **Vite** for development and builds
 
 ## Getting Started
 
-1.  **Clone the repository**
+```bash
+git clone https://github.com/RoPeak/algo-visualiser.git
+cd algo-visualiser
+npm install
+npm run dev
+```
 
-    ```bash
-    git clone https://github.com/RoPeak/algo-visualiser.git
-    ```
+Build for production:
 
-2.  **Install dependencies**
+```bash
+npm run build
+```
 
-    ```bash
-    npm install
-    ```
+The built output in `dist/` can be deployed to Vercel, Netlify, or GitHub Pages.
 
-3.  **Run the development server**
+## Status
 
-    ```bash
-    npm run dev
-    ```
-
-4.  **Build for production**
-    ```bash
-    npm run build
-    ```
+Working — all seven algorithms visualise correctly with play/pause and speed controls.
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
+MIT
