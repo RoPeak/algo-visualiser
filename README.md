@@ -2,6 +2,10 @@
 
 An interactive sorting algorithm visualiser built with React 19, TypeScript, and Tailwind CSS. Demonstrates clean separation of algorithm logic, animation state management, and component composition.
 
+## Preview
+
+![Preview](docs/images/preview.png)
+
 ## What it does
 
 Select a sorting algorithm, hit play, and watch a bar chart sort itself step by step. Adjust the animation speed, pause mid-sort, and reset to a new random array at any time. All algorithms share the same visual interface via a common step-trace format, so swapping in a new algorithm requires no UI changes.
